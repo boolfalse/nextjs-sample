@@ -399,3 +399,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,phpstorm+all,webstorm+all,intellij+all,jetbrains+all,linux,macos,windows,react,visualstudiocode
+
+
+
+.env

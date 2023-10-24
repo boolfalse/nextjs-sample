@@ -1,34 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Sample Next.js app
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+### About:
+
+- Simple Next.js app that uses the OpenAI API to generate text based on a prompt.
+
+
+### Development Setup:
+
+- Clone the repo:
+```shell
+git clone git@github.com:boolfalse/nextjs-sample.git && cd nextjs-sample
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Install dependencies (Node.js v18+)
+```shell
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2. Get the [Google OAuth credentials](https://console.cloud.google.com/apis/credentials).
+- Create a new project in the Google Cloud Console
+- Set up the OAuth consent screen
+- Create an OAuth client ID
+- Add the authorized redirect URI as `http://localhost:3000/api/auth/callback/google`
+- Setup the `.env` file as described in `.env.example`
+```shell
+OAUTH_GOOGLE_CLIENT_ID="************-********************************.apps.googleusercontent.com"
+OAUTH_GOOGLE_CLIENT_SECRET="******-****************************"
+OAUTH_GOOGLE_REDIRECT_URI="http://localhost:3000/api/auth/callback/google"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Get the MongoDB credentials:
+- Create a new project in the MongoDB Cloud
+- Create a new cluster
+- Create a new database user
+- Setup the `.env` file as described in `.env.example`
+```shell
+MONGODB_DATABASE="<database>"
+MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/<database>?retryWrites=true&w=majority"
+```
 
-## Learn More
+4. Setup NextAuth credentials:
+- Run the following command:
+```shell
+openssl rand -base64 32
+```
+- Setup the `.env` file as described in `.env.example`
+```shell
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_URL_INTERNAL="http://localhost:3000"
+NEXTAUTH_SECRET="********************************************"
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Run the app:
+```shell
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Open the app in the [browser](http://localhost:3000/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Resources:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next.js Docs](https://nextjs.org/docs)
+- [Next.js 13 Full Course 2023 | Build and Deploy a Full Stack App Using the Official React Framework](https://www.youtube.com/watch?v=wm5gMKuwSYk)
+- [Official GitHub repo](https://github.com/adrianhajdin/project_next_13_ai_prompt_sharing)
+- [Starting snippets](https://gist.github.com/adrianhajdin/6df61c6cd5ed052dce814a765bff9032)
+- [Official Demo](https://promptopia.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Author:
+
+- [BoolFalse](https://boolfalse.com/)
