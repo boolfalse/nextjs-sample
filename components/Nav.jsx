@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import {getProviders, signIn, signOut, useSession} from "next-auth/react";
 
 const Nav = () => {
-    const isAuth = true;
+    const {data: session} = useSession();
     const [providers, setProviders] = useState([]);
     const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -20,7 +20,7 @@ const Nav = () => {
 
     return (
         <nav className='flex-between w-full mb-16 pt-3'>
-            <Link href='/' className='flex gap-2 flex-center'>
+            <Link href='#' className='flex gap-2 flex-center'>
                 <Image src='/assets/images/logo.svg'
                        alt='Logo'
                        className='object-contain'
@@ -32,14 +32,14 @@ const Nav = () => {
 
             {/*Desktop Navigation*/}
             <div className='sm:flex hidden'>
-                {isAuth ? (
+                {session?.user ? (
                     <div className='flex gap-3 md:gap-5'>
-                        <Link href='/prompt-create' className='black_btn'>Create Prompt</Link>
+                        <Link href='#prompt-create' className='black_btn'>Create Prompt</Link>
                         <button onClick={() => signOut()}
                                 type='button'
                                 className='outline_btn'>Sign Out</button>
-                        <Link href='/profile'>
-                            <Image src='/assets/images/avatar.jpeg'
+                        <Link href='#profile'>
+                            <Image src={session?.user?.image || '/assets/images/avatar.jpeg'}
                                    height='35'
                                    width='35'
                                    className='rounded-full'
@@ -63,9 +63,9 @@ const Nav = () => {
 
             {/*Mobile Navigation*/}
             <div className='sm:hidden flex relative'>
-                {isAuth ? (
+                {session?.user ? (
                     <div className='flex'>
-                        <Image src='/assets/images/avatar.jpeg'
+                        <Image src={session?.user?.image || '/assets/images/avatar.jpeg'}
                                height='35'
                                width='35'
                                className='rounded-full'
@@ -74,10 +74,10 @@ const Nav = () => {
                         />
                         {toggleMenu && (
                             <div className='dropdown'>
-                                <Link href='/profile'
+                                <Link href='#profile'
                                       onClick={() => setToggleMenu(false)}
                                       className='dropdown_link'>Profile</Link>
-                                <Link href='/prompt-create'
+                                <Link href='#prompt-create'
                                       onClick={() => setToggleMenu(false)}
                                       className='dropdown_link'>Create Prompt</Link>
                                 <button type='button'
